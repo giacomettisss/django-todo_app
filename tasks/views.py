@@ -8,7 +8,7 @@ def test(request):
 
 
 def taskList(request):
-    return render(request, 'tasks/list.html')
+    return render(request, 'tasks/task_list.html')
 
 
 def yourName(request, name):
