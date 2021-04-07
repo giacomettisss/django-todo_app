@@ -19,6 +19,7 @@ from . import views
 
 urlpatterns = [
     path('test/', views.test),
-    path('tasks/', views.taskList, name='task-list'),
-    path('yourname/<str:name>/', views.yourName)
+    path('', views.taskList, name='task-list'),
+    path('yourname/<str:name>/', views.yourName),
+    path('task/<int:id>/', views.taskView, name="task-view")
 ]
