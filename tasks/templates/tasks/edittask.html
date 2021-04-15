@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %} Adicione uma tarefa {% endblock %} 
+{% block title %} Edit Task {% endblock %} 
 
 {% block content %} 
 <div class="offset-1 col-10 list-div">
-    <h1>Add your new task</h1>
+    <h1>Editing</h1>
+    <h2 class="mb-4">'{{ task.title }}'</h2>
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" name="" id="" class="btn btn-success mb-3" value="Create task">
+        <input type="submit" name="" id="" class="btn btn-success mb-3" value="Edit Task">
     </form>
     
 </div>
