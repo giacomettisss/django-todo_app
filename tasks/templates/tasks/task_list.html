@@ -11,14 +11,21 @@
         </div>
     </a>
     <div class="col-9 search-div">
-        <input class="form-control" type="text" name="search" id="serach" placeholder="Digiteo nome da tarefa para buscas">
+        <input class="form-control" type="text" name="search" id="serach" placeholder="Digite o nome da tarefa para buscas">
         <i class="fas fa-search"></i>
     </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="alert alert-{{message.tags}}"> {{message}} {% endif %}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <ul class="task-list">
         {% for task in tasks %}
         <li class="task-item">
             <span><a href="/task/{{ task.id }}">{{ task.title }}</a></span>
-            <span><i class="fas fa-trash"></i></span>
+            <a href="/deletetask/{{ task.id }}"><span><i class="fas fa-trash"></i></span></a>
             <a href="/edittask/{{ task.id }}"><span><i class="fas fa-edit"></i></span></a>
         </li>
         {% endfor %}
