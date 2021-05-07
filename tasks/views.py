@@ -14,13 +14,17 @@ def test(request):
 
 def taskList(request):
 
-    object_list = Task.objects.all().order_by('-created_at')
-    per_page = 5
-    paginator = Paginator(object_list, per_page)
+    search = request.GET.get('search')
 
-    page = request.GET.get('page')
+    if search:
+        tasks = Task.objects.filter(title__icontains=search)
+    else:
+        object_list = Task.objects.all().order_by('-created_at')
+        per_page = 5
+        paginator = Paginator(object_list, per_page)
+        page = request.GET.get('page')
+        tasks = paginator.get_page(page)
 
-    tasks = paginator.get_page(page)
 
     return render(request, 'tasks/task_list.html', {'tasks': tasks})
 
