@@ -19,9 +19,9 @@ def taskList(request):
     search = request.GET.get('search')
 
     if search:
-        tasks = Task.objects.filter(title__icontains=search)
+        tasks = Task.objects.filter(title__icontains=search, user=request.user)
     else:
-        object_list = Task.objects.all().order_by('-created_at')
+        object_list = Task.objects.all().order_by('-created_at').filter(user=request.user)
         per_page = 5
         paginator = Paginator(object_list, per_page)
         page = request.GET.get('page')
@@ -45,6 +45,7 @@ def newTask(request):
         if form.is_valid():
             task = form.save(commit=False)
             task.done = 'doing'
+            task.user = request.user
             task.save()
 
             return redirect('/')
