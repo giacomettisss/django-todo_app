@@ -63,6 +63,18 @@
     display: inline-block;
 }
 
+/* filter */
+
+.filter-div {
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+#filter {
+    display: inline-block;
+    width: 200px;
+    margin-left: 10px;
+}
 
 /* Lista de tarefas */
 
@@ -78,11 +90,16 @@
     list-style: none;
     font-size: 20px;
     height: 50px;
+    padding: 0 15px;
     padding-top: 10px;
     border-bottom: 1px dashed #ccc;
 }
 
-.fas.fa-trash, .fas.fa-edit {
+.task-item.done{
+    background-color: #CCC;
+}
+
+.fas.fa-trash, .fas.fa-edit, .fas.fa-check {
     cursor: pointer;
     margin: 5px;
     font-size: 20px;
@@ -94,7 +111,16 @@
 }
 
 .fas.fa-edit {
-    color: #13c43f;
+    color: #44db1e;
+}
+
+
+.done .fas.fa-check {
+    color: #3476e2;
+}
+
+.fas.fa-check {
+    color: #CCC;
 }
 
 /* Rodapé */

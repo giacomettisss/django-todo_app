@@ -17,9 +17,12 @@ def test(request):
 def taskList(request):
 
     search = request.GET.get('search')
+    filter = request.GET.get('filter')
 
     if search:
         tasks = Task.objects.filter(title__icontains=search, user=request.user)
+    elif filter:
+        tasks = Task.objects.filter(done=filter, user=request.user)
     else:
         object_list = Task.objects.all().order_by('-created_at').filter(user=request.user)
         per_page = 5
@@ -69,6 +72,19 @@ def editTask(request, id):
             return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
     else:
         return render(request, 'tasks/edittask.html', {'form': form, 'task': task})
+
+@login_required
+def changeStatus(request, id):
+    task = get_object_or_404(Task, pk=id)
+
+    if(task.done == 'doing'):
+        task.done = 'done'
+    else:
+        task.done = 'doing'
+    
+    task.save()
+
+    return redirect('/')
 
 @login_required
 def deleteTask(request, id):
